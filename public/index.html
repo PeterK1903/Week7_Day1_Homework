@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue</title>
+  <script src="./js/bundle.js"></script>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div id="app">
+
+    <ul>
+
+
+      <form v-on:submit.prevent="saveNewItem">
+            <label id="label-head" for="new-item"> ToDo's:</label> <br>
+            <input id="new-item" type="text" v-model="newItem"/>
+            <label for="caps" class="primary" ></label>
+        <input type="radio" id="pri1" name="priority" value="High" v-model="newItem">
+        <label for="caps">High</label>
+        <input type="radio" id="pri2" name="priority" value="Low" v-model="newItem">
+        <label for="caps">Low</label>
+            <input id="save-button" type="submit" value="Save item"/>
+          </form>
+          <br>
+          <li v-for="(item, index) in items" v-bind:class="item.isHighP ? 'high-priority' : 'low-priority' ">
+        <span> {{ item.name }} </span>
+        <span v-if="item.isHighP"> High Priority ‼️ </span>
+        <button v-if="!item.isHighP" v-on:click="reassignItem(index)">Assign High Priority</button>
+       </li>
+
+    </ul>
+
+  </div>
+</body>
+</html>
